@@ -1,167 +1,209 @@
-# Pool1337
+```markdown
+<!-- 🌟 HEADER ANIMATION STYLE -->
+<pre>
+╔════════════════════════════════════════════════════════════╗
+║  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦  ║
+║  ╭────────────────────────────────────────────────────╮   ║
+║  │  ⚡  P O O L 1 3 3 7  ⚡  │   ║
+║  │  🌊 42 / 1337 Piscine Learning Journey  🌊  │   ║
+║  ╰────────────────────────────────────────────────────╯   ║
+║  ✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦  ║
+╚════════════════════════════════════════════════════════════╝
+</pre>
 
-A structured and continuously evolving repository containing 1337 / 42 Piscine exercises. The goal is to document progression through C and Shell programming while developing strong fundamentals in systems programming, algorithms, and problem-solving.
+<div align="center">
 
----
+![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=22&duration=3000&pause=500&color=00FF00&center=true&vCenter=true&width=600&lines=🚀+Learning+C+from+Scratch;💻+Shell+Scripting+Master;🧠+Algorithmic+Thinking;🔥+Norminette+Approved)
 
-## Overview
+<img src="https://media.giphy.com/media/6nWhy3ulBL7GSuKrjm/giphy.gif" width="600" alt="coding-animation">
 
-This repository represents a learning journey through the 1337 Piscine curriculum. It is organized to reflect incremental skill development from basic shell usage to advanced C programming concepts such as memory management, recursion, and data structures.
+</div>
 
-The focus is not only on completing exercises but on understanding constraints, writing clean code, and improving problem-solving discipline.
-
----
-
-## Structure
-
-```
-.
-├── Shell00/
-├── Shell01/
-├── C00/
-├── C01/
-├── C02/
-├── C03/
-├── C04/
-├── C05/
-├── C06/
-├── C07/
-├── C08/
-├── C09/
-├── Rush00/
-├── Rush01/
-└── Exam/
-```
-
-Each directory corresponds to a stage in the curriculum.
-
-* Shell modules: command-line fundamentals and scripting
-* C modules: progressive C programming concepts
-* Rush projects: collaborative problem-solving tasks
-* Exam: timed evaluation simulations
+> 🎯 **Mission:** A structured and continuously evolving repository containing **1337 / 42 Piscine** exercises.  
+> 🧭 **Goal:** Document progression through **C** and **Shell** programming while developing strong fundamentals in systems programming, algorithms, and problem-solving.
 
 ---
 
-## Learning Goals
+## 🌀 LOADING PROGRESS BAR (ASCII STYLE)
 
-* Master low-level programming in C
-* Understand memory allocation and pointer behavior
-* Develop algorithmic thinking under constraints
-* Improve code clarity and correctness
-* Follow strict coding standards (Norminette)
-* Build discipline under time pressure
-
----
-
-## Curriculum Breakdown
-
-### Shell
-
-| Module  | Focus                                       |
-| ------- | ------------------------------------------- |
-| Shell00 | Basic shell commands and navigation         |
-| Shell01 | Permissions, scripts, and automation basics |
-
-### C Modules
-
-| Module | Focus                                   |
-| ------ | --------------------------------------- |
-| C00    | Basic syntax, loops, output functions   |
-| C01    | Pointers and arrays fundamentals        |
-| C02    | String manipulation                     |
-| C03    | Advanced string functions               |
-| C04    | Base conversion and atoi logic          |
-| C05    | Recursion and mathematical logic        |
-| C06    | Program arguments (argc/argv)           |
-| C07    | Dynamic memory allocation (malloc/free) |
-| C08    | Structures and header organization      |
-| C09    | Libraries and Makefile systems          |
-
-### Rush Projects
-
-| Project | Focus                                        |
-| ------- | -------------------------------------------- |
-| Rush00  | Team coordination and basic project building |
-| Rush01  | Advanced teamwork and problem-solving        |
-
-### Exams
-
-Timed exercises simulating Piscine evaluation conditions:
-
-* exam00
-* exam01
-* exam02
-* exam03
-
-Key constraints:
-
-* Strict time limits
-* Norminette compliance
-* No external assistance
-* High focus on accuracy and logic
-
----
-
-## Code Standards
-
-* Norminette compliance required
-* No memory leaks allowed
-* Clear and minimal logic
-* No unnecessary complexity
-* Proper file organization
-
----
-
-## Build & Execution
-
-Compilation example:
-
-```
-cc -Wall -Wextra -Werror file.c
-```
-
-Run:
-
-```
-./a.out
+```text
+[🐣] Shell00    ████████░░░░░░░░░░░░ 40%
+[🐤] Shell01    ████████████░░░░░░░░ 60%
+[🐥] C00-C03    ████████████████░░░░ 80%
+[🐔] C04-C09    ████████████████████ 100% ✓
+[🦅] Rush/Exam  ████████████░░░░░░░░ 60%
 ```
 
 ---
 
-## Tools
+## 🗂️ REPO STRUCTURE - TREE VIEW ANIMATED
 
-* C language
-* GCC compiler
-* Linux environment
-* Vim editor
-* Git version control
-* GitHub for version tracking
+<pre>
+📦 Pool1337
+┣ 📂 Shell00/          🐚 ▶️ Basic Commands
+┣ 📂 Shell01/          🐚 ▶️ Scripts & Perms
+┣ 📂 C00/              💠 ▶️ Hello World + Loops
+┣ 📂 C01/              💠 ▶️ Pointers Intro
+┣ 📂 C02/              💠 ▶️ String Magic
+┣ 📂 C03/              💠 ▶️ Advanced Strings
+┣ 📂 C04/              💠 ▶️ Base Converter
+┣ 📂 C05/              💠 ▶️ Recursion Realm
+┣ 📂 C06/              💠 ▶️ argc/argv Boss
+┣ 📂 C07/              💠 ▶️ malloc/free Zone
+┣ 📂 C08/              💠 ▶️ Structs Universe
+┣ 📂 C09/              💠 ▶️ Makefile Master
+┣ 📂 Rush00/           👥 ▶️ Team Project I
+┣ 📂 Rush01/           👥 ▶️ Team Project II
+┗ 📂 Exam/             ⏱️ ▶️ Survival Mode
+</pre>
 
 ---
 
-## Progress Philosophy
+## 🎮 CURRICULUM - INTERACTIVE TABLE STYLE
 
-This repository is treated as a professional learning log. Each commit represents incremental improvement rather than simple task completion.
+### 🐚 SHELL MODULES
+| Module | Focus | Status | Visual |
+|--------|-------|--------|--------|
+| `Shell00` | Basic commands & navigation | 🟢 Done | `echo "Hello 1337"` |
+| `Shell01` | Permissions, scripts, automation | 🟡 In Progress | `chmod +x script.sh` |
 
-Focus areas:
-
-* Understanding before implementation
-* Iterative improvement
-* Code review mindset
-* Building long-term technical discipline
-
----
-
-## Author
-
+### 💠 C MODULES - LEVEL UP SYSTEM
+```text
+🎮 LEVEL 1: C00 ──────────────────▶ [✓] Syntax & Loops
+🎮 LEVEL 2: C01 ──────────────────▶ [✓] Pointers Basics  
+🎮 LEVEL 3: C02 ──────────────────▶ [✓] String Power
+🎮 LEVEL 4: C03 ──────────────────▶ [✓] Advanced Strings
+🎮 LEVEL 5: C04 ──────────────────▶ [⏳] Base Conversion
+🎮 LEVEL 6: C05 ──────────────────▶ [🔒] Recursion Boss
+🎮 LEVEL 7: C06 ──────────────────▶ [🔒] argc/argv
+🎮 LEVEL 8: C07 ──────────────────▶ [🔒] Dynamic Memory
+🎮 LEVEL 9: C08 ──────────────────▶ [🔒] Structures
+🎮 LEVEL 10: C09 ─────────────────▶ [🔒] Makefile System
 ```
-login: Baktrack-sec
-school: 1337 / 42 Network
+
+### 👥 RUSH PROJECTS
+| Project | Type | Team | Focus |
+|---------|------|------|-------|
+| `Rush00` | 🎨 Collaborative | 2-3 persons | Basic project building |
+| `Rush01` | 🧩 Advanced Team | 2-3 persons | Complex problem-solving |
+
+### ⏱️ EXAM SIMULATIONS
+<pre>
+╭────────────────────────────────────╮
+│  🧪 EXAM MODE ACTIVATED 🧪         │
+├────────────────────────────────────┤
+│  exam00  →  [▰▰▰▰▰▰▰▰▰▰] 100% ✓   │
+│  exam01  →  [▰▰▰▰▰▰▰▰░░░] 80%      │
+│  exam02  →  [▰▰▰▰▰▰░░░░░░] 60%      │
+│  exam03  →  [▰▰▰▰░░░░░░░░] 40%      │
+╰────────────────────────────────────╯
+</pre>
+
+---
+
+## 🎯 LEARNING GOALS - CHECKLIST ANIMATED
+
+<pre>
+  ╭────────────────────────────────────╮
+  │  🚀 MISSION OBJECTIVES:            │
+  ├────────────────────────────────────┤
+  │  [✓] Master low-level C programming│
+  │  [✓] Understand memory & pointers  │
+  │  [✓] Algorithmic thinking ⚡       │
+  │  [✓] Clean code & Norminette ✅    │
+  │  [✓] Problem-solving discipline 🧠│
+  │  [⏳] Build projects under pressure│
+  ╰────────────────────────────────────╯
+</pre>
+
+---
+
+## ⚡ CODE STANDARDS - BADGE STYLE
+
+<div align="center">
+
+![C](https://img.shields.io/badge/Language-C-blue?style=for-the-badge&logo=c)
+![GCC](https://img.shields.io/badge/Compiler-GCC-orange?style=for-the-badge&logo=gnu)
+![Linux](https://img.shields.io/badge/OS-Linux-yellow?style=for-the-badge&logo=linux)
+![Vim](https://img.shields.io/badge/Editor-Vim-green?style=for-the-badge&logo=vim)
+![Norminette](https://img.shields.io/badge/Style-Norminette-red?style=for-the-badge)
+
+</div>
+
+```text
+┌─────────────────────────────────┐
+│ ✅ RULES:                        │
+│ • Norminette compliance REQUIRED│
+│ • Zero memory leaks allowed 🚫  │
+│ • Clear, minimal, efficient logic│
+│ • No unnecessary complexity     │
+│ • Proper file organization 📁   │
+└─────────────────────────────────┘
 ```
 
 ---
 
-## License
+## 🛠️ BUILD & EXECUTE - TERMINAL STYLE
 
-For educational and training purposes only.
+<pre>
+╭─────────────────────────────────╮
+│  $ cc -Wall -Wextra -Werror file.c  │
+│  $ ./a.out                          │
+│                                     │
+│  > Hello, 1337 World! 🎉           │
+│  > Compilation: SUCCESS ✅         │
+│  > Memory Leaks: 0 🎯              │
+╰─────────────────────────────────╯
+</pre>
 
+---
+
+## 🔄 PROGRESS PHILOSOPHY - MOTIVATIONAL
+
+<pre>
+     🌱
+     │
+     ├── Day 1: "What is a pointer?" 🤔
+     │
+     ├── Week 2: "Malloc makes sense!" 💡
+     │
+     ├── Week 3: "Recursion is magic!" ✨
+     │
+     ├── Rush Week: "Teamwork = Power" 👥
+     │
+     └── Final: "I think in C now" 🧠💻
+
+          🚀 KEEP CODING, KEEP GROWING 🚀
+</pre>
+
+---
+
+## 👤 AUTHOR & LICENSE - FOOTER ANIMATION
+
+<div align="center">
+
+<pre>
+╔════════════════════════════════════╗
+║  👤 AUTHOR                         ║
+║  ─────────────                     ║
+║  Login : Baktrack-sec 🔐          ║
+║  School: 1337 / 42 Network 🎓     ║
+║                                    ║
+║  📬 "Code is poetry, compile it." ║
+╚════════════════════════════════════╝
+</pre>
+
+![License](https://img.shields.io/badge/License-Educational%20Use%20Only-blue?style=flat-square)
+
+> ⚠️ **Disclaimer:** For educational and training purposes only.  
+> 🔐 Not for commercial use.
+
+</div>
+
+<!-- 🎇 FOOTER SPARKLE -->
+<pre>
+✧･ﾟ: *✧✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦✦......
+</pre>
+```
+
+---
