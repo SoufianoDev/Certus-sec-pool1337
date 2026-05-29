@@ -1,13 +1,6 @@
 <div align="center">
 
-```
-██████╗  ██████╗  ██████╗ ██╗     ██╗ ██╗██████╗ ██████╗  ███████╗
-██╔══██╗██╔═══██╗██╔═══██╗██║    ███║ ╚═╝╚════██╗╚════██╗ ╚════██║
-██████╔╝██║   ██║██║   ██║██║    ╚██║     █████╔╝ █████╔╝     ██╔╝
-██╔═══╝ ██║   ██║██║   ██║██║     ██║     ╚═══██╗ ╚═══██╗    ██╔╝
-██║     ╚██████╔╝╚██████╔╝███████╗██║    ██████╔╝██████╔╝    ██║
-╚═╝      ╚═════╝  ╚═════╝ ╚══════╝╚═╝    ╚═════╝ ╚═════╝     ╚═╝
-```
+<img src= "./assets/pool_1337.png"></img>
 
 **A structured journey through C & Shell Programming**
 
@@ -15,10 +8,10 @@
 
 ---
 
-![Language](https://img.shields.io/badge/Language-C-blue?style=flat-square&logo=c)
-![Shell](https://img.shields.io/badge/Shell-Bash-green?style=flat-square&logo=gnubash)
-![School](https://img.shields.io/badge/School-1337%20%2F%2042-black?style=flat-square)
-![Norm](https://img.shields.io/badge/Norminette-compliant-brightgreen?style=flat-square)
+![Language](https://img.shields.io/badge/Programming-%2300599C?style=for-the-badge&logo=c&logoColor=white)
+![Shell](https://img.shields.io/badge/Bash-green?style=for-the-badge&logo=gnubash&logoColor=white)
+![School](https://img.shields.io/badge/1337%20%2F%2042-black?style=for-the-badge&logo=target&logoColor=white)
+![Norm](https://img.shields.io/badge/Norminette-Compliant-brightgreen?style=for-the-badge&logo=c&logoColor=white)
 
 </div>
 
