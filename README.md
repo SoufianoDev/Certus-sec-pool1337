@@ -3,12 +3,9 @@
 <<<<<<< HEAD
 <img src= "./assets/pool_1337.png"></img>
 =======
-```
->>>>>>> c459f91 (update)
 
 [![sabir's 42 stats](https://badge.mediaplus.ma/greenbinary/Baktrack-sec)](https://github.com/oakoudad/badge42)
 
-```
 **A structured journey through C & Shell Programming**
 
 *1337 / 42 Network — Piscine*
