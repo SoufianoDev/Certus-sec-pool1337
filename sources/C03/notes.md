@@ -1,261 +1,186 @@
-# C03 – Structures, Memory Layout and Data Organization (C Language)
+# C03 – String Comparison and Concatenation Concepts
 
-This document explains how C organizes complex data using structures and how memory layout behaves internally.
+## 1. String Comparison
 
----
+### Why `==` Cannot Be Used
 
-# 1. STRUCTURES (struct)
+In C, a pointer holds a **memory address**, not **content**:
 
-A structure groups multiple variables under a single custom type.
+```
+First string:   "abc" ←── address 0x1000
+Second string:  "abc" ←── address 0x2000
 
-```c
-struct User
-{
-    int age;
-    char grade;
-};
+s1 == s2  ←── compares 0x1000 with 0x2000 → false!
 ```
 
-### Purpose
+Even if the text is identical, strings may be at **different locations** in memory.
 
-Structures allow related data to be stored together.
+### The Principle: Character-by-Character
 
-### Components
+Compare character by character until a difference is found:
 
-* `struct User` = custom type
-* `age` and `grade` = structure members
-
----
-
-# 2. STRUCTURE INSTANCE
-
-```c
-struct User u;
+```
+String 1:  a  b  c  \0
+             ↓  ↓  ↓  ↓
+String 2:  a  b  d  \0
+             ↓  ↓  ↓
+          match match different!
 ```
 
-### Behavior
+### Comparison Result
 
-Memory is allocated for all members together.
+- **Zero**: strings are completely identical
+- **Positive**: first string is "greater" (its different character has higher ASCII value)
+- **Negative**: first string is "smaller" (its different character has lower ASCII value)
 
-Example:
+### Lexicographical Order
 
-```c
-u.age = 19;
-u.grade = 'A';
 ```
+ASCII ordering:
+'0'(48) < '1'(49) < ... < '9'(57) < 'A'(65) < ... < 'Z'(90) < 'a'(97) < ... < 'z'(122)
 
-The structure stores both values in contiguous memory.
-
----
-
-# 3. MEMORY LAYOUT
-
-Structures occupy a continuous block of memory.
-
-Example:
-
-```c
-struct Data
-{
-    int x;
-    char y;
-};
-```
-
-### Internal layout
-
-* `x` stored first
-* `y` stored after x
-
-The compiler may insert padding bytes for alignment.
-
----
-
-# 4. MEMORY ALIGNMENT
-
-Processors access aligned memory more efficiently.
-
-Example:
-
-```c
-struct Test
-{
-    char a;
-    int b;
-};
-```
-
-### Possible layout
-
-* char = 1 byte
-* padding = 3 bytes
-* int = 4 bytes
-
-Total size may become 8 bytes instead of 5.
-
----
-
-# 5. ACCESSING MEMBERS
-
-```c
-u.age = 20;
-```
-
-### Operator
-
-* `.` accesses structure members
-
----
-
-# 6. POINTER TO STRUCTURE
-
-```c
-struct User *p;
-```
-
-A structure pointer stores the address of a structure.
-
-Example:
-
-```c
-p = &u;
+Examples:
+"Apple" < "apple"    (A=65 < a=97)
+"10" < "2"           ('1'=49 < '2'=50)
+"abc" < "abcd"       (first one ends first)
 ```
 
 ---
 
-# 7. ARROW OPERATOR
+## 2. Bounded Comparison
 
-Instead of:
+### The Idea
 
-```c
-(*p).age = 20;
+Compare **only the first n characters**, regardless of the rest:
+
+```
+"HelloWorld" vs "HelloThere"  (n=5)
+     ↓
+"Hello" == "Hello" → match!
 ```
 
-C provides:
-
-```c
-p->age = 20;
-```
-
-### Meaning
-
-* `->` dereferences pointer and accesses member directly
+### Uses
+- Checking prefix (beginning of string)
+- Comparing filenames (without extension)
+- Keyword searching
 
 ---
 
-# 8. STRUCTURES AND FUNCTIONS
+## 3. String Concatenation
 
-Structures can be passed to functions.
+### The Principle
 
-### By value
+Add a string to the **end** of another string:
 
-```c
-void f(struct User u)
+```
+First string:    "Hello\0"
+                     ↓
+                  Find \0 here
+                     ↓
+Second string:   " World\0"
+                     ↓
+                  Start copying from here
+                     ↓
+Result:          "Hello World\0"
 ```
 
-Copies entire structure.
+### Steps:
+1. Move through the first string until you find `\0`
+2. Start copying from that position
+3. Copy the second string until `\0`
+4. Add `\0` at the end
 
-### By pointer
+### Buffer Overflow Danger
 
-```c
-void f(struct User *u)
+```
+Allocated buffer: only 6 bytes
+"Hello" (5 bytes + 1 for \0)
+
+Want to add: " World" (6 bytes)
+              ↓
+Result: 11 bytes > 6 bytes → overflow!
+              ↓
+Writing to unallocated memory → undefined behavior
 ```
 
-Works directly on original memory.
+### The Solution: Bounded Concatenation
 
----
+Add **at most n characters** from the second string:
 
-# 9. NESTED STRUCTURES
-
-Structures can contain other structures.
-
-```c
-struct Point
-{
-    int x;
-    int y;
-};
-
-struct Player
-{
-    struct Point pos;
-    int hp;
-};
 ```
-
-This creates hierarchical memory organization.
-
----
-
-# 10. TYPEDEF
-
-`typedef` creates aliases for types.
-
-Example:
-
-```c
-typedef struct User
-{
-    int age;
-} User;
-```
-
-Now:
-
-```c
-User u;
-```
-
-instead of:
-
-```c
-struct User u;
+Buffer: 10 bytes
+"Hello" + " World" (n=3)
+    ↓
+"Hello Wor" (9 bytes + \0)
 ```
 
 ---
 
-# 11. STRUCTURE COPYING
+## 4. Substring Search
 
-Structures can be copied directly.
+### The Problem
 
-```c
-User a;
-User b;
+We want to know: is "World" inside "Hello World"?
 
-b = a;
+### Naive Algorithm
+
+```
+Text:    "Hello World"
+Search:  "World"
+
+Check every position:
+Position 0: "Hello..." ≠ "World" ❌
+Position 1: "ello..."  ≠ "World" ❌
+Position 2: "llo..."   ≠ "World" ❌
+...
+Position 6: "World"    == "World" ✅
 ```
 
-### Behavior
+### Implementation: Nested Loops
 
-All members are copied.
-
-This is different from arrays.
+- **Outer loop**: move through the main text (position by position)
+- **Inner loop**: compare the substring from each position
+- If all characters match → found it!
+- If text ends without finding → not present
 
 ---
 
-# 12. STRUCTURE SIZE
+## 5. Safe Concatenation (strlcat Concept)
 
-```c
-sizeof(struct User)
+### The Problem with strcat and strncat
+
+- `strcat`: no size check → buffer overflow
+- `strncat`: adds n chars + `\0`, but doesn't check if buffer is big enough
+
+### The Solution: strlcat
+
+```
+Idea: know the total buffer size, guarantee no overflow
+
+Buffer: 10 bytes
+"Hello" already there (5 bytes + 1)
+Remaining: 4 bytes (10 - 5 - 1 for \0)
+
+Add: " World" (6 bytes)
+      ↓
+Add only 3 characters (4 - 1 for \0)
+Result: "Hello Wor\0"
 ```
 
-Returns total memory occupied including padding.
+### What does it return?
+
+Returns the **total length the concatenated string would have been** if the buffer was large enough. This allows the user to know if the text was truncated.
 
 ---
 
-# CORE SUMMARY (C03)
+## Summary
 
-* Structures organize related data
-* Members are stored in contiguous memory
-* Alignment affects memory size
-* Structure pointers allow direct memory manipulation
-* `->` combines dereference and member access
-* typedef simplifies complex declarations
-
----
-
-# IMPORTANT CONCEPT
-
-Structures are memory layouts defined by the programmer.
-
-C allows direct control over how data is organized in memory, making structures fundamental for systems programming, networking, operating systems, and low-level software design.
+| Concept | Core Idea |
+|---------|-----------|
+| **Comparison** | Character by character, `==` does not work |
+| **Ordering** | Depends on ASCII values |
+| **Bounded** | Compare only first n characters |
+| **Concatenate** | Start from end of first string |
+| **Search** | Nested loops |
+| **Safe** | Check buffer size |
+| **Application** | Sorting, searching, filtering |

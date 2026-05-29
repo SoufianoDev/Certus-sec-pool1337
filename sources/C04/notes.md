@@ -1,193 +1,239 @@
-# C04 – Strings, Arrays and Low-Level Text Handling (C Language)
+# C04 – Arrays, Strings, and Number Base Conversion Concepts
 
-C04 covers how C handles arrays and strings at memory level. There is no built-in string type; everything is based on raw memory and pointer arithmetic.
+## 1. Arrays
 
----
+### Memory Representation
 
-# 1. ARRAYS
-
-An array is a contiguous block of memory storing elements of the same type.
-
-```c
-int arr[3] = {1, 2, 3};
-```
-
-### Memory behavior
-
-* Elements are stored sequentially
-* Each element has a fixed size depending on its type
-* Access is done via index or pointer arithmetic
-
----
-
-# 2. ARRAYS AND POINTER RELATION
-
-In C, the array name represents the address of its first element in most expressions.
-
-```c
-int *p = arr;
-```
-
-Equivalent expressions:
-
-```c
-arr == &arr[0]
-arr[i] == *(arr + i)
-```
-
-### Key idea
-
-Array indexing is syntactic sugar over pointer arithmetic.
-
----
-
-# 3. STRINGS IN C
-
-A string in C is an array of characters terminated by a null byte \0.
-
-```c
-char str[] = "abc";
-```
-
-### Memory representation
+An array is a **contiguous block of memory** storing elements of the same type:
 
 ```
-'a' 'b' 'c' '\0'
-```
-
-### Key property
-
-* The \0 marks the end of the string
-* Without it, behavior is undefined
-
----
-
-# 4. STRING TRAVERSAL
-
-Since there is no stored length, strings are processed by scanning memory.
-
-```c
-int i = 0;
-while (str[i] != '\0')
-{
-    i++;
-}
-```
-
-### Concept
-
-Traversal stops only when the null terminator is found.
-
----
-
-# 5. POINTERS AND STRINGS
-
-```c
-char *p = "abc";
-```
-
-### Important distinction
-
-* Array string: modifiable memory
-* String literal: usually read-only memory
-
-Example of undefined behavior:
-
-```c
-p[0] = 'A';
-```
-
----
-
-# 6. STRING OPERATIONS CONCEPT
-
-Standard string functions are implemented using loops:
-
-* strlen → counts characters until \0
-* strcpy → copies byte by byte
-* strcmp → compares character by character
-
-All operations are memory scans.
-
----
-
-# 7. MEMORY LAYOUT OF STRINGS
-
-Example:
-
-```c
-"hi"
-```
+int arr[3] = {10, 20, 30};
 
 Memory:
+┌────────┬────────┬────────┐
+│   10   │   20   │   30   │
+└────────┴────────┴────────┘
+  4 bytes  4 bytes  4 bytes
+   (int)    (int)    (int)
+```
+
+### Array-Pointer Relationship
 
 ```
-'h' -> 'i' -> '\0'
+arr[i]  ==  *(arr + i)
+  ↑           ↑
+Index      Address calculation
 ```
 
-A pointer to a string points only to the first character.
+- `arr` is the address of the first element
+- `arr + i` calculates the address of element i (considering type size)
+- `*(arr + i)` accesses the value at that address
 
 ---
 
-# 8. MULTIDIMENSIONAL ARRAYS
+## 2. Strings in C
+
+### Array vs Pointer
 
 ```c
-int matrix[2][3];
+char s1[] = "hello";    // Array: modifiable
+char *s2 = "hello";     // Pointer: points to read-only literal
 ```
 
-### Memory layout
-
-Stored in row-major order:
-
 ```
-[m00][m01][m02][m10][m11][m12]
+s1:  ┌─────┬─────┬─────┬─────┬─────┬─────┐
+     │ 'h' │ 'e' │ 'l' │ 'l' │ 'o' │ '\0' │  ←── Stack, modifiable
+     └─────┴─────┴─────┴─────┴─────┴─────┘
+
+s2:  ┌──────────┐
+     │ 0x6000   │  ←── Stack (pointer)
+     └────┬─────┘
+          ↓
+        ┌─────┬─────┬─────┬─────┬─────┬─────┐
+        │ 'h' │ 'e' │ 'l' │ 'l' │ 'o' │ '\0' │  ←── Text segment, read-only
+        └─────┴─────┴─────┴─────┴─────┴─────┘
 ```
 
-All elements are contiguous in memory.
+### Common Errors
+
+- **Out of bounds**: `arr[10]` when size is 3 → undefined behavior
+- **Missing `\0`**: string without terminator → reads random memory
 
 ---
 
-# 9. COMMON ERRORS
+## 3. String to Integer Conversion
 
-### Out of bounds access
+### The Idea
+
+```
+Text: "1234"
+       ↓
+Start from left:
+Digit 1: Result = 0 × 10 + 1 = 1
+Digit 2: Result = 1 × 10 + 2 = 12
+Digit 3: Result = 12 × 10 + 3 = 123
+Digit 4: Result = 123 × 10 + 4 = 1234
+```
+
+### Building Algorithm
+
+```
+Result = 0
+For each character in text:
+    If character is a digit:
+        Digit = ASCII value - ASCII value of '0'
+        Result = Result × 10 + Digit
+    Else:
+        Stop
+```
+
+### Handling Signs
+
+```
+"-42" → Recognize '-' first → set negative flag
+"+42" → Recognize '+' first → set positive flag
+"  42" → Skip leading spaces
+```
+
+---
+
+## 4. Integer to String Conversion
+
+### The Idea
+
+```
+Number: 1234
+       ↓
+Use repeated division:
+1234 / 10 = 123 remainder 4
+ 123 / 10 = 12  remainder 3
+  12 / 10 = 1   remainder 2
+   1 / 10 = 0   remainder 1
+
+Remainders (in reverse): 1, 2, 3, 4 → "1234"
+```
+
+### Algorithm
+
+```
+If number is negative:
+    Add '-' to result
+    Make number positive
+
+While number > 0:
+    Remainder = number % 10
+    Convert remainder to character (remainder + '0')
+    Add character to result
+    Number = number / 10
+
+Reverse the result (since we collected it backwards)
+```
+
+---
+
+## 5. Number Bases
+
+### The Idea
+
+The same number can be represented in different bases:
+
+```
+Number 42:
+In decimal (base 10):  42
+In binary (base 2):    101010
+In hexadecimal (base 16): 2a
+In octal (base 8):     52
+```
+
+### Converting from Decimal to Any Base
+
+```
+Number: 42
+Base: 16 (hexadecimal)
+
+42 / 16 = 2 remainder 10 → 'a'
+ 2 / 16 = 0 remainder 2  → '2'
+
+Result (in reverse): "2a"
+```
+
+### Character Table for Bases
+
+```
+Values 0-9:   ←──→  '0'-'9'
+Values 10-15: ←──→  'a'-'f'
+Values 16-35: ←──→  'a'-'z' (for larger bases)
+```
+
+### Validating a Base
+
+Rules for a valid base string:
+- Must contain at least 2 characters
+- No duplicate characters
+- No '+' or '-'
+- No whitespace
+
+---
+
+## 6. Converting from Any Base to Decimal
+
+### The Idea
+
+```
+Text: "2a" in hexadecimal base
+       ↓
+Start from left:
+Character '2': value is 2
+Result = 0 × 16 + 2 = 2
+
+Character 'a': value is 10
+Result = 2 × 16 + 10 = 42
+```
+
+### Algorithm
+
+```
+Result = 0
+For each character in text:
+    Find character's value in base (index in base string)
+    Result = Result × base_length + character_value
+```
+
+---
+
+## 7. Multidimensional Arrays
+
+### Memory Layout
 
 ```c
-arr[10];
+int matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};
 ```
 
-Accessing memory outside allocated range leads to undefined behavior.
-
-### Missing null terminator
-
-Strings without \0 cause over-read into unrelated memory.
-
----
-
-# 10. ARRAYS VS POINTERS
-
-```c
-char s1[] = "hello";
-char *s2 = "hello";
+```
+In memory (Row Major order):
+┌─────┬─────┬─────┬─────┬─────┬─────┐
+│  1  │  2  │  3  │  4  │  5  │  6  │
+└─────┴─────┴─────┴─────┴─────┴─────┘
+ [0,0] [0,1] [0,2] [1,0] [1,1] [1,2]
 ```
 
-| Type    | Behavior                 |
-| ------- | ------------------------ |
-| Array   | Local modifiable buffer  |
-| Pointer | Points to literal memory |
+### Access
+
+```
+matrix[i][j] = *(matrix + i × 3 + j)
+```
 
 ---
 
-# CORE SUMMARY (C04)
+## Summary
 
-* Arrays are contiguous memory blocks
-* Strings are null-terminated character arrays
-* No native string type exists in C
-* Pointer arithmetic is fundamental
-* String operations are memory traversal loops
-
----
-
-# IMPORTANT CONCEPT
-
-C treats strings as raw memory sequences.
-Understanding C04 means understanding how text is physically stored and traversed in memory.
+| Concept | Core Idea |
+|---------|-----------|
+| **Array** | Contiguous memory block |
+| **Index** | `arr[i] == *(arr + i)` |
+| **String** | Character array + `\0` |
+| **Text→Number** | `× 10 + digit` from left |
+| **Number→Text** | `/ 10` and collect remainders |
+| **Base** | The radix determines symbol count |
+| **Conversion** | Division/remainder for down, `× base + digit` for up |
+| **Multidimensional** | Row-major order in memory |

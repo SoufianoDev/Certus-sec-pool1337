@@ -1,144 +1,312 @@
+# C07 – Dynamic Memory Concepts (malloc / free)
 
-# C07 – Dynamic Memory (malloc / free)
+## 1. Stack vs Heap
 
-## Introduction
-C07 is about manual memory management in C. Unlike previous topics where memory is automatic (stack), here you control memory at runtime using the heap.
+### Stack
 
----
-
-## 1. HEAP MEMORY
-
-- Memory allocated during program execution
-- Controlled manually by the programmer
-- Must be freed explicitly
-
----
-
-## 2. malloc (Memory Allocation)
-
-```c
-#include <stdlib.h>
-
-int *p = malloc(sizeof(int));
-````
-
-### Behavior:
-
-* Allocates memory on the heap
-* Returns a pointer to that memory
-* Content is undefined (garbage values)
-
----
-
-## 3. calloc
-
-```c
-int *p = calloc(5, sizeof(int));
+```
+┌─────────────────┐ ←── High address
+│   main()        │
+│   int a = 5     │
+│   int b = 10    │
+├─────────────────┤
+│   func()        │ ←── Created on call
+│   int x = 20    │
+│   int y = 30    │
+├─────────────────┤
+│   ...           │
+└─────────────────┘ ←── Low address (grows downward)
 ```
 
-### Difference from malloc:
+**Characteristics:**
+- Automatic: created and destroyed with functions
+- Fast: simple allocation (pointer move)
+- Limited: fixed size (~8 MB)
+- Temporary: data disappears after return
 
-* Allocates memory for multiple elements
-* Initializes memory to zero
+### Heap
+
+```
+┌─────────────────────────────┐
+│                             │
+│        Heap Memory          │  ←── Manual allocation
+│                             │
+│    ┌─────────────────┐      │
+│    │  malloc(100)    │      │  ←── 100 bytes
+│    │  (dynamic size) │      │
+│    └─────────────────┘      │
+│                             │
+│    ┌─────────────────┐      │
+│    │  malloc(50)     │      │  ←── 50 bytes
+│    └─────────────────┘      │
+│                             │
+└─────────────────────────────┘
+```
+
+**Characteristics:**
+- Manual: you control allocation and deallocation
+- Large: much bigger than stack
+- Persistent: data remains until freed
+- Flexible: size can change (realloc)
 
 ---
 
-## 4. free
+## 2. malloc - Memory Allocation
 
-```c
+### The Concept
+
+```
+Request from system: "I need 100 bytes"
+          ↓
+System searches heap for free space
+          ↓
+Returns address of first byte
+          ↓
+Use this address to access memory
+```
+
+### Why sizeof?
+
+```
+I want an array of 5 integers:
+
+Wrong way: malloc(5)  ←── 5 bytes only!
+Correct way: malloc(5 × sizeof(int))  ←── 20 bytes
+
+sizeof(int) = 4 bytes (usually)
+5 × 4 = 20 bytes ←── correct!
+```
+
+### Why Check for NULL?
+
+```
+malloc(1 billion bytes)  ←── may fail!
+        ↓
+Returns NULL
+        ↓
+If we use NULL → crash!
+
+Solution:
+int *p = malloc(size);
+if (p == NULL) {
+    // Handle error
+    return;
+}
+```
+
+---
+
+## 3. free - Memory Deallocation
+
+### The Concept
+
+```
+Done using memory → tell system "I no longer need it"
+          ↓
+System returns it to free memory pool
+          ↓
+Can be used later
+```
+
+### Memory Leak Danger
+
+```
+int *p = malloc(100);
+        ↓
+p = NULL;  ←── Lost the address!
+        ↓
+Memory is still allocated...
+        ↓
+...but no pointer to it!
+        ↓
+Cannot free it → memory leak!
+```
+
+**Result:** Over time, the program consumes more and more memory until it stops.
+
+### Double Free Danger
+
+```
+free(p);   ←── First free
+free(p);   ←── Second free!
+        ↓
+undefined behavior
+        ↓
+Program may crash unexpectedly
+```
+
+### Safe Pattern
+
+```
 free(p);
+p = NULL;  ←── Make pointer "empty"
+        ↓
+Now p points to nothing
+        ↓
+free(p) again ←── Safe! (free(NULL) does nothing)
 ```
-
-### Purpose:
-
-* Releases allocated heap memory
-* Prevents memory leaks
 
 ---
 
-## 5. MEMORY LIFETIME
+## 4. calloc - Allocation with Initialization
 
-| Type  | Lifetime                   |
-| ----- | -------------------------- |
-| Stack | automatic (function scope) |
-| Heap  | manual (until free)        |
+### Difference from malloc
+
+| | malloc | calloc |
+|---|--------|--------|
+| Initialization | Random values (undefined) | Zero |
+| Parameters | Single size | Count + size |
+| Use | General memory | Number arrays |
+
+```
+malloc(5 × sizeof(int)):
+┌─────┬─────┬─────┬─────┬─────┐
+│ ??? │ ??? │ ??? │ ??? │ ??? │  ←── Random values
+└─────┴─────┴─────┴─────┴─────┘
+
+calloc(5, sizeof(int)):
+┌─────┬─────┬─────┬─────┬─────┐
+│  0  │  0  │  0  │  0  │  0  │  ←── Zero-initialized
+└─────┴─────┴─────┴─────┴─────┘
+```
 
 ---
 
-## 6. MEMORY LEAK
+## 5. String Duplication
 
-```c
-int *p = malloc(10);
-p = NULL; // lost reference → memory leak
+### The Concept
+
+```
+Original string: "Hello" (in stack or literals)
+        ↓
+I want an independent copy in heap
+        ↓
+malloc(6)  ←── 5 chars + 1 for \0
+        ↓
+"Hello" in heap ←── modifiable and persistent
 ```
 
-Problem:
+### Why Do We Need It?
 
-* Memory still allocated
-* No way to free it
+- **String literals**: `char *s = "hello"` → cannot modify
+- **Local strings**: `char s[] = "hello"` in function → disappears after return
+- **Solution**: heap copy → remains until we delete it
+
+### Steps:
+1. Calculate string length
+2. Allocate `length + 1` bytes
+3. Check for NULL
+4. Copy character by character
+5. Add `\0`
 
 ---
 
-## 7. DOUBLE FREE (ERROR)
+## 6. Dynamic Array Creation
 
-```c
-free(p);
-free(p); // invalid
+### The Concept
+
+```
+I want an array of numbers from min to max-1
+
+Example: min=3, max=7
+Result: [3, 4, 5, 6]
+
+Size: max - min = 4 elements
 ```
 
+### Why Use Heap?
+
+```
+// Stack (fixed)
+int arr[4];  ←── Size must be known at compile time
+
+// Heap (dynamic)
+int *arr = malloc(size × sizeof(int));  ←── Size at runtime!
+```
+
+---
+
+## 7. String Splitting
+
+### The Concept
+
+```
+Text: "Hello,World,42"
+Delimiter: ","
+        ↓
+Result: ["Hello", "World", "42"]
+```
+
+### Implementation
+
+```
+1. Count number of words
+2. Allocate array of pointers (word_count + 1)
+3. For each word:
+   - Skip delimiters
+   - Calculate word length
+   - Allocate memory for word
+   - Copy word
+4. Terminate array with NULL
+```
+
+### Why "Array of Pointers"?
+
+```
 Result:
+┌─────────┬─────────┬─────────┬─────────┐
+│ 0x1000  │ 0x1006  │ 0x100c  │  NULL   │  ←── Array
+└────┬────┴────┬────┴────┬────┴─────────┘
+     ↓         ↓         ↓
+   "Hello"   "World"   "42"
+   (6 bytes)  (6 bytes)  (3 bytes)
+```
 
-* Undefined behavior
-* Program crash possible
+Each word in a separate location in heap!
 
 ---
 
-## 8. REAL USAGE PATTERN
+## 8. realloc - Resizing Memory
 
-```c
-int *arr = malloc(5 * sizeof(int));
+### The Concept
 
-if (!arr)
-    return 1;
+```
+Current array: [1, 2, 3] (3 elements)
+        ↓
+Want to add two more: [1, 2, 3, 4, 5]
+        ↓
+realloc(p, 5 × sizeof(int))
+        ↓
+System tries:
+  - Extend current space (if space available)
+  - Or move data to a new larger location
+```
 
-arr[0] = 10;
-arr[1] = 20;
+### Why Check for NULL?
 
-free(arr);
+```
+int *new_p = realloc(p, new_size);
+if (new_p == NULL) {
+    // Failed! But p is still valid
+    return;
+}
+p = new_p;  // Now use the new pointer
 ```
 
 ---
 
-## 9. WHY HEAP EXISTS
+## Summary
 
-* Stack is limited
-* Heap allows dynamic size
-* Needed for:
-
-  * arrays with runtime size
-  * data structures (linked lists, trees)
-
----
-
-## 10. CORE CONCEPT
-
-C07 introduces full manual control over memory.
-
-You are responsible for:
-
-* allocation
-* usage
-* deallocation
-
----
-
-## CORE SUMMARY
-
-* malloc → allocate memory
-* calloc → allocate + zero initialize
-* free → release memory
-* heap → dynamic memory region
-* errors → leak, double free, invalid access
-
-```
-```
+| Concept | Core Idea |
+|---------|-----------|
+| **Stack** | Automatic, fast, limited, temporary |
+| **Heap** | Manual, large, persistent, flexible |
+| **malloc** | Request memory from heap |
+| **free** | Return memory to system |
+| **NULL check** | Always verify allocation success |
+| **NULL after free** | Make pointer empty after freeing |
+| **Memory Leak** | Losing pointer before free |
+| **Double Free** | Freeing same memory twice |
+| **calloc** | malloc + zero initialization |
+| **realloc** | Resize allocated memory |
+| **Split** | Array of pointers for each word |
