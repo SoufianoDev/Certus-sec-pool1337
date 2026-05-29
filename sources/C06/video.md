@@ -1,4 +1,4 @@
-````md id="c06_two_videos"
+
 # 📘 C06 – argc & argv (Command Line Arguments)
 
 ## 🎯 Topic
@@ -20,7 +20,7 @@ Core idea:
 
 ## 🧠 Core Concept
 
-```text
+```c
 int main(int argc, char **argv)
 ````
 
