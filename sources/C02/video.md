@@ -26,6 +26,15 @@ C02 focuses on:
 
 ---
 
+# 🎥 Pointer Video
+
+[▶️ Watch Video](https://youtu.be/rJrd2QMVbGM)
+
+🖼️ Preview:
+[![Pointer Video](https://img.youtube.com/vi/rJrd2QMVbGM/hqdefault.jpg)](https://youtu.be/rJrd2QMVbGM)
+
+---
+
 ## 🧠 Core Idea
 
 ```text

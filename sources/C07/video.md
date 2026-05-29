@@ -17,6 +17,15 @@ Core concept:
 
 ---
 
+# 🎥 video as stack and heap
+
+[▶️ Watch video ](https://youtu.be/ep2xOW52mDY)
+
+🖼️ Preview:
+[![stack and heap ](https://img.youtube.com/vi/ep2xOW52mDY/hqdefault.jpg)](https://youtu.be/ep2xOW52mDY)
+
+---
+
 ## 🧠 Core Concept
 
 ```text id="mem_model"
