@@ -26,6 +26,15 @@ Core idea:
 
 ---
 
+# 🎥 Big O Notation - Full Course
+
+[▶️ Watch Video](https://youtu.be/6aDHWSNKlVw)
+
+🖼️ Preview:
+[![Recursion](https://img.youtube.com/vi/6aDHWSNKlVw/hqdefault.jpg)](https://youtu.be/6aDHWSNKlVw)
+
+---
+
 ## 🧠 Core Concept
 
 ```text

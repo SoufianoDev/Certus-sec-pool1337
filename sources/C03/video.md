@@ -42,6 +42,15 @@ This stage introduces how complex data is represented and accessed in memory.
 
 ---
 
+# 🎥 String handling functions | strlen() | strcpy() | strcmp() | strcat()
+
+[▶️ Watch Video](https://youtu.be/o5Ek57N-6sU)
+
+🖼️ Preview:
+[![Struct Pointers](https://img.youtube.com/vi/o5Ek57N-6sU/hqdefault.jpg)](https://youtu.be/o5Ek57N-6sU)
+
+---
+
 ## 🧠 Memory Layout Model
 
 ```text

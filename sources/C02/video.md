@@ -35,6 +35,14 @@ C02 focuses on:
 
 ---
 
+# 🎥 String Functions in C Explained (strlen strcpy strcat strcmp)
+
+[▶️ Watch Video](https://youtu.be/biyetQMFxEQ)
+
+🖼️ Preview:
+[![Pointer Video](https://img.youtube.com/vi/biyetQMFxEQ/hqdefault.jpg)](https://youtu.be/biyetQMFxEQ)
+
+---
 ## 🧠 Core Idea
 
 ```text
