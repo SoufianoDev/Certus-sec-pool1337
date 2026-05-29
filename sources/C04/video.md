@@ -1,10 +1,10 @@
-# 📹 C04 – Arrays (C Base)
+# 📹 C04 – Arrays & Base System (C Base)
 
 ## 🎯 Topic
-C04 focuses on arrays and how they are represented in memory as continuous blocks.
+C04 focuses on arrays and how data is structured in memory.
 
 Core idea:
-> An array is a sequence of elements stored consecutively in memory.
+> Data is stored in memory and accessed through structured patterns like arrays.
 
 ---
 
@@ -17,12 +17,21 @@ Core idea:
 
 ---
 
-# 🎥 Video 2 – Memory Layout (Support)
+# 🎥 Video 2 – Memory Layout
 
 [▶️ Watch Video](https://youtu.be/69CVJPgEO9o)
 
 🖼️ Preview:
 [![Memory Layout](https://img.youtube.com/vi/69CVJPgEO9o/hqdefault.jpg)](https://youtu.be/69CVJPgEO9o)
+
+---
+
+# 🎥 Video 3 – Base System
+
+[▶️ Watch Video](https://youtu.be/7JYO04ZUlE0)
+
+🖼️ Preview:
+[![Base System](https://img.youtube.com/vi/7JYO04ZUlE0/hqdefault.jpg)](https://youtu.be/7JYO04ZUlE0)
 
 ---
 
