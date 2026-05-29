@@ -3,6 +3,8 @@
 - Turn-in directory : ex04/
 - Files to turn in : ft_convert_base.c, ft_convert_base2.c
 - Allowed functions : malloc, free
+-------------------------
+
  • Create a function that returns the result of the conversion of the string nbr from a
    base base_from to a base base_to.\
 
