@@ -6,16 +6,30 @@
 /*   By: sabir <sabir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/20 17:08:26 by sabir             #+#    #+#             */
-/*   Updated: 2026/05/20 17:39:04 by sabir            ###   ########.fr       */
+/*   Updated: 2026/05/30 03:05:38 by sabir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+int	strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_strdup(char *src)
 {
 	int		i;
 	char	*dest;
 
+	i = strlen(src);
 	dest = malloc(i * sizeof(char));
+	i = 0;
 	while (src[i] != '\0')
 	{
 		dest[i] = src[i];
