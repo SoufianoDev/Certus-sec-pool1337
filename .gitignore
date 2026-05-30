@@ -1,0 +1,17 @@
+# Vim swap files
+*.swp
+*.swo
+*~
+
+# Compiled files
+*.o
+*.a
+a.out
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
