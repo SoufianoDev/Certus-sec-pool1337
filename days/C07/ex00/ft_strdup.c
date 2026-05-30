@@ -15,7 +15,6 @@ char	*ft_strdup(char *src)
 	int		i;
 	char	*dest;
 
-	i = 0;
 	dest = malloc(i * sizeof(char));
 	while (src[i] != '\0')
 	{
@@ -24,5 +23,4 @@ char	*ft_strdup(char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
-	free(dest);
 }
