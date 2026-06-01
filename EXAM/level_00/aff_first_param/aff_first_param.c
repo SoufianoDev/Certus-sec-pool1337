@@ -5,28 +5,18 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabir <sabir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/25 19:59:19 by sabir             #+#    #+#             */
-/*   Updated: 2026/05/25 20:16:20 by sabir            ###   ########.fr       */
+/*   Created: 2026/06/01 15:05:43 by sabir             #+#    #+#             */
+/*   Updated: 2026/06/01 15:06:05 by sabir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	main(int argc, char **argv)
+int		main(int ac, char **av)
 {
-	int	j;
-
-	(void)argc;
-	j = 0;
-	if (!argv[1])
-	{
-		return (0);
-	}
-	while (argv[1][j] != '\0')
-	{
-		write(1, &argv[1][j], 1);
-		j++;
-	}
+	if (ac > 1)
+		while (*av[1])
+			write(1, av[1]++, 1);
 	write(1, "\n", 1);
 	return (0);
 }

@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maff_alpha.c                                       :+:      :+:    :+:   */
+/*   aff_a.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabir <sabir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/25 22:10:48 by sabir             #+#    #+#             */
-/*   Updated: 2026/05/25 22:19:18 by sabir            ###   ########.fr       */
+/*   Created: 2026/06/01 14:37:37 by sabir             #+#    #+#             */
+/*   Updated: 2026/06/01 14:56:00 by sabir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	main(void)
+int		main(int argc, char **argv)
 {
-	char	a;
-	char	b;
-
-	a = 'a';
-	while (a <= 'z')
+	if (argc != 2)
+		write(1, "a", 1);
+	else
 	{
-		b = a + 1;
-		b = b - 32;
-		write(1, &a, 1);
-		write(1, &b, 1);
-		a += 2;
+		while (*argv[1])
+		{
+			if (*argv[1] == 'a')
+			{
+				write(1, "a", 1);
+				break;
+			}
+			argv[1]++;
+		}
 	}
 	write(1, "\n", 1);
 	return (0);

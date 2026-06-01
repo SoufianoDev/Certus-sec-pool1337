@@ -1,27 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aff_last_param.c                                   :+:      :+:    :+:   */
+/*   maff_alpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sabir <sabir@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/05/25 20:27:32 by sabir             #+#    #+#             */
-/*   Updated: 2026/05/25 20:41:35 by sabir            ###   ########.fr       */
+/*   Created: 2026/06/01 15:03:42 by sabir             #+#    #+#             */
+/*   Updated: 2026/06/01 15:04:10 by sabir            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-int	main(int argc, char **argv)
+int		main(void)
 {
-	int	i;
-
-	i = 0;
-	while (argv[argc - 1][i] != '\0')
-	{
-		write(1, &argv[argc - 1][i], 1);
-		i++;
-	}
-	write(1, "\n", 1);
+	write(1, "aBcDeFgHiJkLmNoPqRsTuVwXyZ\n", 27);
 	return (0);
 }
