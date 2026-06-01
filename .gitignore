@@ -1,17 +1,42 @@
-# Vim swap files
-*.swp
-*.swo
-*~
-
-# Compiled files
-*.o
-*.a
-a.out
-
 # OS files
 .DS_Store
 Thumbs.db
 
-# IDE
+# Editors
 .vscode/
 .idea/
+*.swp
+*.swo
+*~
+
+# Compiled files (C/C++)
+*.o
+*.out
+*.a
+*.so
+a.out
+core
+vgcore.*
+
+# Logs
+*.log
+
+# Archives
+*.zip
+*.tar
+*.tar.gz
+*.rar
+*.7z
+
+# Temporary files
+*.tmp
+*.temp
+
+# Python (safe to ignore even if not used)
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Node (safe general ignore)
+node_modules/
